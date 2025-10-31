@@ -10,20 +10,28 @@ DESCRIPTION:A 3D ARRAY TO CALCULATE AND DISPLAY TOTAL NUMBER OF OCCUPIED ROOMS A
 
 int main() {
     int chain[3][5][10];
-    int total_occupied = 0;
+    int totalOccupied = 0;
 
-    srand(time(NULL));
+    srand(time(0));
 
-    for (int b = 0; b < 3; b++) {
-        for (int f = 0; f < 5; f++) {
-            for (int r = 0; r < 10; r++) {
-                chain[b][f][r] = rand() % 2; // 0 or 1
-                total_occupied += chain[b][f][r];
+    for (int branch = 0; branch < 3; branch++) {
+        printf("\nBranch %d:\n", branch + 1);
+        for (int floor = 0; floor < 5; floor++) {
+            int floorOccupied = 0;
+            for (int room = 0; room < 10; room++) {
+                chain[branch][floor][room] = rand() % 2;
+                printf("%d ", chain[branch][floor][room]);
+
+                if (chain[branch][floor][room] == 1) {
+                    totalOccupied++;
+                    floorOccupied++;
+                }
             }
+            printf(" | Occupied on this floor: %d\n", floorOccupied);
         }
     }
 
-    printf("Total number of occupied rooms across all branches: %d\n", total_occupied);
+    printf("\nTotal occupied rooms across all branches: %d\n", totalOccupied);
 
     return 0;
 }
